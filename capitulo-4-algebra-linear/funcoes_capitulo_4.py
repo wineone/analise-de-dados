@@ -8,7 +8,7 @@ def vector_add(a,b):
     return [i+j for i,j in zip(a,b)]
 
 
-def vector_sum(*vectors):
+def vector_sum(vectors):
     """
         faz a soma de n vetores dois a dois
     """
@@ -109,7 +109,7 @@ def make_matrix(n,k,f):
     """
         constroi uma matriz de acordo com os argumentos e a função passada
     """
-    return [[f(i,j) for i in range(k)] for j in range(n)]
+    return [[f(j,i) for i in range(k)] for j in range(n)]
 
     
 def is_diagonal(i,j):
