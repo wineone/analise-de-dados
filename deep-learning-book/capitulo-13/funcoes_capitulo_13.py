@@ -77,8 +77,8 @@ class Network:
         #print("variação dos pesos,\n",n_p)
         #print("variação dos bias\n",n_b)
 
-        self.weights = [w + (eta / len(mini_batch)) * d_p for w,d_p in zip(self.weights,n_p)] # pesos são atualizados aq
-        self.bias = [b + (eta / len(mini_batch)) * d_b for b, d_b in zip(self.bias, n_b)]
+        self.weights = [w - (eta / len(mini_batch)) * d_p for w,d_p in zip(self.weights,n_p)] # pesos são atualizados aq
+        self.bias = [b - (eta / len(mini_batch)) * d_b for b, d_b in zip(self.bias, n_b)]
 
         #print("pesos\n",self.weights)
         #print("bias\n",self.bias)
@@ -104,6 +104,9 @@ class Network:
             activation = sigmoid(z)
             activations.append(activation)
 
+        activations = np.array([np.array(a) for a in activations])
+        zs = np.array([np.array(a) for a in zs])
+
         # atualização da ultima camada
         delta = self.cost_derivate(activations[-1],y) * sigmoid_prime(zs[-1]) # primeiro delta
         delta_b[-1] = delta
@@ -124,7 +127,7 @@ class Network:
         """
             o custo da função de erro no ultimo neuronio
         """
-        return (y-out)
+        return (out-y)
     
 
 
